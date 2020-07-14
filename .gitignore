@@ -30,3 +30,5 @@
 # PHPUnit
 /app/phpunit.xml
 /phpunit.xml
+
+.idea
