@@ -1,17 +1,17 @@
-path = docker
+up:
+	docker-compose up -d
+
+down:
+	docker-compose down
+
+reload:
+	down compose
 
 clean:
 	docker system prune -a -f
 
-build:
-	cd $(path) && docker build -t symfony .
+create-db:
+	docker-compose exec app sh -c 'php bin/console doctrine:database:create'
 
-rebuild: clean build
-
-run:
-	cd $(path) && docker run --rm -p 81:80 symfony
-
-rerun: rebuild run
-
-compose:
-	docker-compose up --build -d
+generate-db:
+	docker-compose exec app sh -c 'php bin/console doctrine:schema:update --force'
